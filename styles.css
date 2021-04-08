@@ -1,0 +1,26 @@
+body {
+margin: 0;
+padding: 0;
+box-sizing:border-box;
+}
+
+.container {
+text-align: center;  
+margin-top: 100px;
+}
+
+.container select {
+ margin: 20px;   
+}
+
+.container table {
+border: 1px solid black;
+margin-left: auto;
+margin-right: auto;
+border-spacing: 0;
+}
+
+.container td{
+border: 1px solid black;
+padding: 10px;
+}
