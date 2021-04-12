@@ -6,11 +6,11 @@ window.onload = function () {
 
 // Очищаем tbody
 const clearFields = selector => {
-    $(`${selector}`).html("").val("");
+    $(selector).html("").val("");
 }
 
 // Задаем события
-const setListeners = (object) => {
+const setListeners = object => {
 
     // Событие для селекта    
     // Меняется опция - фильтруются страны согласно региону
