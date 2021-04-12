@@ -4,9 +4,8 @@
 // страны с частичным совпадением по name, capital, region
 
 // Очищаем tbody
-const clearElem = selector => {        
-$(`${selector}`).html("");    
-$(`${selector}`).val(""); 
+const clearFields = selector => {        
+$(`${selector}`).html("").val(""); 
 }
 
 // Задаем события
@@ -15,18 +14,19 @@ const setListeners = (object) => {
 // Событие для селекта    
 // Меняется опция - фильтруются страны согласно региону
 $('#select').change(e => {
-clearElem('#table tbody');
+clearFields('#table tbody');
+clearFields('#search');
 let newRegions = object.filter(elem => elem.region == e.currentTarget.value);
-console.log(newRegions);
 addToDom(newRegions);
 });
 
 // Событие для инпута
-$('#search').keyup(e => {    
-// 1. Я ввожу букву 
-// 2. Проверяю все страны у которых в названии есть эта буква (через фильтр)
-// 3. Обновляю таблицу согласно названию стран   
-console.log(e.target.value); 
+$('#search').keyup(e => {
+let newRegions = object.filter(elem => elem.name.includes(e.currentTarget.value) || elem.capital.includes(e.currentTarget.value) || elem.region.includes(e.currentTarget.value));
+if(newRegions.length > 0) {
+clearFields('#table tbody');    
+addToDom(newRegions);  
+}  
 })
 
 };
