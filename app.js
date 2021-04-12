@@ -1,12 +1,18 @@
 
 // Функция срабатывает при загрузке страницы
-window.onload = function () {
+window.onload = () =>{
     renderCountries();
 }
 
 // Очищаем tbody
 const clearFields = selector => {
     $(selector).html("").val("");
+}
+
+const displayCurrencies = object => 
+    // for(let i = object.currencies.length; i < object.currencies.length; i++) {
+
+    // }
 }
 
 // Задаем события
@@ -23,7 +29,7 @@ const setListeners = object => {
 
     // Событие для инпута
     $('#search').keyup(e => {
-        let query = e.currentTarget.value.toLowerCase();
+        let query = e.currentTarget.value.toLowerCase().trim();
         let newRegions = object.filter(elem => elem.name.toLowerCase().includes(query) || elem.capital.toLowerCase().includes(query) || elem.region.toLowerCase().includes(query));
         if (newRegions.length > 0) {
             clearFields('#table tbody');
@@ -49,7 +55,7 @@ const renderCountries = () => {
 
 
 // Фильтрация регионов через select
-function filterRegions(object) {
+const filterRegions = object => {
 
     // Создаем новый массив с регионами
     const regions = object.map(el => {
@@ -81,6 +87,7 @@ const addToDom = object => {
 <td>${elem.region}</td>
 <td>${elem.population}</td>
 <td>${elem.area}</td>
+<td>${elem.currencies.length}</td>
 <td><img src="${elem.flag}" width="50px"></img></td>
 </tr>`);
     })
