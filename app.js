@@ -9,11 +9,7 @@ const clearFields = selector => {
     $(selector).html("").val("");
 }
 
-const displayCurrencies = object => 
-    // for(let i = object.currencies.length; i < object.currencies.length; i++) {
 
-    // }
-}
 
 // Задаем события
 const setListeners = object => {
@@ -49,6 +45,7 @@ const renderCountries = () => {
             addToDom(data);
             filterRegions(data);
             setListeners(data);
+            console.log(addCurrencies(data));
         })
         .catch(err => console.log(err)); // Если GET запрос не удался - выводим ошибку
 }
@@ -66,7 +63,7 @@ const filterRegions = object => {
 
     console.log(removeDuplicates(regions));
 
-    removeDuplicates(regions).forEach((elem, index) => {
+    removeDuplicates(regions).forEach(elem => {
         // Наполняем селект регионами    
         $('#select').append(`<option value="${elem}">${elem}</option>`);
     })
@@ -80,15 +77,23 @@ const removeDuplicates = arr => [...new Set(arr)];
 // Добавляем свойства объекта в DOM
 const addToDom = object => {
     object.forEach((elem, index) => {
-        $('#table tbody').append(`<tr>
+$('#table tbody').append(`<tr>
 <td>${index + 1}</td>
 <td>${elem.name}</td>
 <td>${elem.capital}</td>
 <td>${elem.region}</td>
 <td>${elem.population}</td>
 <td>${elem.area}</td>
-<td>${elem.currencies.length}</td>
+<td>
+<span>${elem.currencies[0].code}</span>
+</td>
 <td><img src="${elem.flag}" width="50px"></img></td>
 </tr>`);
-    })
+
+    });
+
+
+
 }
+
+// параметро получаем length и делаем цикл до него
