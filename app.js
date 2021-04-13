@@ -14,7 +14,7 @@ const clearFields = selector => {
 // Задаем события
 const setListeners = object => {
 
-    // Событие для селекта    
+    // Событие для селекта
     // Меняется опция - фильтруются страны согласно региону
     $('#select').change(e => {
         clearFields('#table tbody');
@@ -45,7 +45,6 @@ const renderCountries = () => {
             addToDom(data);
             filterRegions(data);
             setListeners(data);
-            console.log(addCurrencies(data));
         })
         .catch(err => console.log(err)); // Если GET запрос не удался - выводим ошибку
 }
@@ -56,15 +55,15 @@ const filterRegions = object => {
 
     // Создаем новый массив с регионами
     const regions = object.map(el => {
-        // Если у страны нет региона, то вместо пробела оставляем "No Region"    
-        el.region ? el.region === "" : el.region = "No Region";
+        // Если у страны нет региона, то вместо пробела оставляем "No Region"
+        el.region = el.region ? el.region : "No Region";
         return el.region;
     });
 
     console.log(removeDuplicates(regions));
 
     removeDuplicates(regions).forEach(elem => {
-        // Наполняем селект регионами    
+        // Наполняем селект регионами
         $('#select').append(`<option value="${elem}">${elem}</option>`);
     })
 
@@ -84,9 +83,11 @@ $('#table tbody').append(`<tr>
 <td>${elem.region}</td>
 <td>${elem.population}</td>
 <td>${elem.area}</td>
-<td>
-<span>${elem.currencies[0].code}</span>
-</td>
+<td>${elem.currencies.map(el => {
+if(el.code !== null && el.code !== '(none)') {
+return el.code;
+}
+}).join(', ')}</td>
 <td><img src="${elem.flag}" width="50px"></img></td>
 </tr>`);
 
